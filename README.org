@@ -1,0 +1,55 @@
+
+* To install
+I installed these (after =npm=) to make the whole thing run:
+#+begin_src bash
+npm install --save-dev jest vite gas-tap
+#+end_src
+
+* AppScript sync
+Use the =clasp= tool.
+
+#+begin_src bash
+sudo npm install -g @google/clasp
+#+end_src
+
+#+begin_src bash
+clasp login
+clasp clone <script_id>
+clasp push
+#+end_src
+
+* COMMENT Testing
+Using the gas-tap from AppScript.
+
+#+begin_src bash
+npm install --save-dev jest gas-tap
+#+end_src
+
+#+begin_src javascript
+  // __tests__/myFunction.test.js (using Jest as an example)
+  const { test } = require('gas-tap'); // Import gas-tap's test function
+
+  // Mock the Apps Script Logger (or other services)
+  global.Logger = {
+    log: jest.fn(), // Create a mock log function
+  };
+
+  // Your test
+  test('myFunction should return correct greeting', () => {
+    const myFunction = require('../src/myFunction'); // Your code
+    const result = myFunction('Test');
+    expect(result).toBe('Hello, Test!');
+    expect(Logger.log).toHaveBeenCalledWith('Hello, Test!'); // Check the log
+  });
+
+  // Run your tests with Jest:
+  // npm test
+#+end_src
+
+If the tests are simple, the only thing that needs stubbing is the =Logger=:
+#+begin_src javascript
+// test.js (or wherever you run your tests)
+global.Logger = {
+  log: () => {}, // Empty function (or you could console.log here)
+};
+#+end_src
