@@ -1,38 +1,47 @@
+This is a Javascript library useful to handle theater plays, their set of scenes, acts, roles and which scenes can be played with a given subset of roles.
 
-* To install
-I installed these (after =npm=) to make the whole thing run:
+This is used to compute possible scenes to rehearse given the list of present actors (and the roles they can play).
+
+* Installation
+You will need to first install =npm= on your system, so the dependencies can then be tracked with it.
+** Tools installation
+I installed these to make the whole thing build and run with tests:
 #+begin_src bash
 npm install --save-dev jest vite gas-tap
 #+end_src
 
-* AppScript sync
-Use the =clasp= tool.
+** AppScript sync
+The library is useful as a Google AppScript library. I use the =clasp= tool to sync to my copy of it.
 
 #+begin_src bash
 sudo npm install -g @google/clasp
 #+end_src
 
+Typical commands to sync with it are:
 #+begin_src bash
 clasp login
 clasp clone <script_id>
 clasp push
 #+end_src
 
-* COMMENT Testing
-Using the gas-tap from AppScript.
+* Testing with gas-tap
+I was using the =gas-tap= from AppScript when developing on the Appscript IDE. So I kept it here.
 
 #+begin_src bash
 npm install --save-dev jest gas-tap
 #+end_src
 
+Tests on a stand-alone need a minimum of stubbing out the infra that is provided by AppScript.
 #+begin_src javascript
-  // __tests__/myFunction.test.js (using Jest as an example)
+  // LOCAL_ONLY START
+  // myFunction.test.js (using Jest as an example)
   const { test } = require('gas-tap'); // Import gas-tap's test function
 
   // Mock the Apps Script Logger (or other services)
   global.Logger = {
     log: jest.fn(), // Create a mock log function
   };
+  // LOCAL_ONLY END
 
   // Your test
   test('myFunction should return correct greeting', () => {
