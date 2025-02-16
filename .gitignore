@@ -1,2 +1,5 @@
 node_modules/**
 Appscript/.clasp.json
+*~
+gas-tap-lib.js
+appsscript.json
